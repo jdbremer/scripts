@@ -1,3 +1,6 @@
+#TO DO ~ Add comments
+
+
 import filecmp
 import os.path
 import sys
@@ -30,7 +33,8 @@ if __name__ == "__main__":
 
                         linesOne = f1.readlines()
                         linesTwo = f2.readlines()
-
+                        #TO DO ~ This doesn't work very well if a space was added to a file, but a majority of the files contents are the same
+                        #Add modifications to handle this...
                         for lineOne in linesOne:
                             countOne += 1
                             for lineTwo in linesTwo:
@@ -39,7 +43,7 @@ if __name__ == "__main__":
                                     if lineOne == lineTwo:   
                                         break
                                     else:
-                                        print("line: " +  str(countOne) + " " + str(countTwo))
+                                        print("line: " + str(countOne) + " " + str(countTwo))
                                         print("New: " + str(lineOne) )
                                         print("Old: " + str(lineTwo))
                                     break   
