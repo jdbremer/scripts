@@ -1,9 +1,21 @@
 #TO DO ~ Add comments
 
-
 import filecmp
 import os.path
 import sys
+
+
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
 
 if __name__ == "__main__":
     directoryOne = ""
@@ -14,7 +26,9 @@ if __name__ == "__main__":
             print("Second arg is dir 2")
         else:
             directoryOne = sys.argv[1]
+            print(directoryOne)
             directoryTwo = sys.argv[2]
+            print(directoryTwo)
     except IndexError:
         print("IndexError")
 
@@ -24,7 +38,7 @@ if __name__ == "__main__":
                     result = filecmp.cmp(directoryOne + "/" + filenameOne, directoryTwo + "/" + filenameTwo, shallow=False)
                     if(result == False):
                         print('\n')
-                        print("------------------------" + filenameOne + "------------------------")
+                        print("------------------------" + filenameOne + "------------------------" + bcolors.HEADER)
                         print('\n')
                         f1 = open(directoryOne + "/" + filenameOne, "r")  
                         f2 = open(directoryTwo + "/" + filenameTwo, "r")  
@@ -33,6 +47,7 @@ if __name__ == "__main__":
 
                         linesOne = f1.readlines()
                         linesTwo = f2.readlines()
+
                         #TO DO ~ This doesn't work very well if a space was added to a file, but a majority of the files contents are the same
                         #Add modifications to handle this...
                         for lineOne in linesOne:
@@ -43,9 +58,9 @@ if __name__ == "__main__":
                                     if lineOne == lineTwo:   
                                         break
                                     else:
-                                        print("line: " + str(countOne) + " " + str(countTwo))
-                                        print("New: " + str(lineOne) )
-                                        print("Old: " + str(lineTwo))
+                                        print("line: " +  str(countOne) + " " + str(countTwo) + bcolors.OKGREEN)
+                                        print("New: " + str(lineOne) + bcolors.OKGREEN)
+                                        print("Old: " + str(lineTwo) + bcolors.OKGREEN)
                                     break   
                             countTwo = 0
                         f1.close()                                       
