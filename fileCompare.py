@@ -38,7 +38,7 @@ if __name__ == "__main__":
                     result = filecmp.cmp(directoryOne + "/" + filenameOne, directoryTwo + "/" + filenameTwo, shallow=False)
                     if(result == False):
                         print('\n')
-                        print("------------------------" + filenameOne + "------------------------" + bcolors.HEADER)
+                        print(print(bcolors.HEADER + "------------------------" + filenameOne + "------------------------" + bcolors.OKCYAN))
                         print('\n')
                         f1 = open(directoryOne + "/" + filenameOne, "r")  
                         f2 = open(directoryTwo + "/" + filenameTwo, "r")  
@@ -58,9 +58,9 @@ if __name__ == "__main__":
                                     if lineOne == lineTwo:   
                                         break
                                     else:
-                                        print("line: " +  str(countOne) + " " + str(countTwo) + bcolors.OKGREEN)
-                                        print("New: " + str(lineOne) + bcolors.OKGREEN)
-                                        print("Old: " + str(lineTwo) + bcolors.OKGREEN)
+                                        print("line: " +  str(countOne) + " " + str(countTwo))
+                                        print("New: " + str(lineOne))
+                                        print("Old: " + str(lineTwo))
                                     break   
                             countTwo = 0
                         f1.close()                                       
