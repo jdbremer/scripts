@@ -6,8 +6,8 @@ import os.path
 import sys
 
 if __name__ == "__main__":
-    pathOne = ""
-    pathTwo = ""
+    directoryOne = ""
+    directoryTwo = ""
     try:
         if("-h" == sys.argv[1]):
             print("First arg is dir 1")
