@@ -10,13 +10,10 @@ if __name__ == "__main__":
             print("First arg is dir 1")
             print("Second arg is dir 2")
         else:
-            pathOne = sys.argv[1]
-            pathTwo = sys.argv[2]
+            directoryOne = sys.argv[1]
+            directoryTwo = sys.argv[2]
     except IndexError:
         print("IndexError")
-
-    directoryOne = pathOne
-    directoryTwo = pathTwo
 
     for filenameOne in os.listdir(directoryOne):
             for filenameTwo in os.listdir(directoryTwo):
