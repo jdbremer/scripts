@@ -31,12 +31,15 @@ def ignoreDifferences(lineOne, lineTwo):
         longerString, shorterString = lineOne, lineTwo
     else:
         longerString, shorterString = lineTwo, lineOne
-    # create a list of indexes where the
+    # create a list of indexes where the longer string has new items
     diffIndex = []
+    indexShift = 0
     for i in range(len(longerString)):
-        if longerString[i] != shorterString[i]:
-            diffIndex.append(i)
-    # see if any of the added/removed items in the longer string are not, if not return False
+        if i + indexShift < len(shorterString):
+            if longerString[i] != shorterString[i + indexShift]:
+                diffIndex.append(i)
+                indexShift += 1
+    # see if any of the added/removed items have insignificant changes, if so True is returned
     for i in diffIndex:
         if longerString[i] not in ignoreList:
             return False
@@ -65,8 +68,8 @@ if __name__ == "__main__":
                         print('\n')
                         print(print(bcolors.HEADER + "------------------------" + filenameOne + "------------------------" + bcolors.OKCYAN))
                         print('\n')
-                        f1 = open(directoryOne + "/" + filenameOne, "r")  
-                        f2 = open(directoryTwo + "/" + filenameTwo, "r")  
+                        f1 = open(directoryOne + "/" + filenameOne, "r")
+                        f2 = open(directoryTwo + "/" + filenameTwo, "r")
                         countOne = 0
                         countTwo = 0
 
@@ -80,7 +83,7 @@ if __name__ == "__main__":
                             for lineTwo in linesTwo:
                                 countTwo += 1
                                 if(countOne == countTwo):
-                                    if lineOne == lineTwo:   
+                                    if lineOne == lineTwo:
                                         break
                                     else:
                                         if not ignoreDifferences(lineOne, lineTwo):
@@ -89,5 +92,5 @@ if __name__ == "__main__":
                                             print("Old: " + str(lineTwo))
                                     break
                             countTwo = 0
-                        f1.close()                                       
-                        f2.close() 
+                        f1.close()
+                        f2.close()
