@@ -58,34 +58,34 @@ if __name__ == "__main__":
         directoryTwo = sys.argv[2]
         print(directoryTwo)
 
-    for filenameOne in os.listdir(directoryOne):
-            for filenameTwo in os.listdir(directoryTwo):
-                if(filenameOne == filenameTwo):
-                    result = filecmp.cmp(directoryOne + "/" + filenameOne, directoryTwo + "/" + filenameTwo, shallow=False)
-                    if(result == False):
-                        print('\n')
-                        print(print(bcolors.HEADER + "------------------------" + filenameOne + "------------------------" + bcolors.OKCYAN))
-                        print('\n')
-                        with open(directoryOne + "/" + filenameOne, "r") as f1, open(directoryTwo + "/" + filenameTwo, "r") as f2:
-                            countOne = 0
-                            countTwo = 0
-
-                            linesOne = f1.readlines()
-                            linesTwo = f2.readlines()
-
-                            # todo Add modifications to handle this...
-                            # todo add ability to recognize when lines have shifted but not changed
-                            for lineOne in linesOne:
-                                countOne += 1
-                                for lineTwo in linesTwo:
-                                    countTwo += 1
-                                    if(countOne == countTwo):
-                                        if lineOne == lineTwo:
-                                            break
-                                        else:
-                                            if not ignoreDifferences(lineOne, lineTwo):
-                                                print("line: " + str(countOne) + " " + str(countTwo))
-                                                print("New: " + str(lineOne))
-                                                print("Old: " + str(lineTwo))
-                                        break
+        for filenameOne in os.listdir(directoryOne):
+                for filenameTwo in os.listdir(directoryTwo):
+                    if(filenameOne == filenameTwo):
+                        result = filecmp.cmp(directoryOne + "/" + filenameOne, directoryTwo + "/" + filenameTwo, shallow=False)
+                        if(result == False):
+                            print('\n')
+                            print(print(bcolors.HEADER + "------------------------" + filenameOne + "------------------------" + bcolors.OKCYAN))
+                            print('\n')
+                            with open(directoryOne + "/" + filenameOne, "r") as f1, open(directoryTwo + "/" + filenameTwo, "r") as f2:
+                                countOne = 0
                                 countTwo = 0
+
+                                linesOne = f1.readlines()
+                                linesTwo = f2.readlines()
+
+                                # todo Add modifications to handle this...
+                                # todo add ability to recognize when lines have shifted but not changed
+                                for lineOne in linesOne:
+                                    countOne += 1
+                                    for lineTwo in linesTwo:
+                                        countTwo += 1
+                                        if(countOne == countTwo):
+                                            if lineOne == lineTwo:
+                                                break
+                                            else:
+                                                if not ignoreDifferences(lineOne, lineTwo):
+                                                    print("line: " + str(countOne) + " " + str(countTwo))
+                                                    print("New: " + str(lineOne))
+                                                    print("Old: " + str(lineTwo))
+                                            break
+                                    countTwo = 0
