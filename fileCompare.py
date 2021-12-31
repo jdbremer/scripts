@@ -45,6 +45,7 @@ def ignoreDifferences(lineOne, lineTwo):
             return False
     return True
 
+
 if __name__ == "__main__":
     directoryOne = ""
     directoryTwo = ""
@@ -68,29 +69,26 @@ if __name__ == "__main__":
                         print('\n')
                         print(print(bcolors.HEADER + "------------------------" + filenameOne + "------------------------" + bcolors.OKCYAN))
                         print('\n')
-                        f1 = open(directoryOne + "/" + filenameOne, "r")
-                        f2 = open(directoryTwo + "/" + filenameTwo, "r")
-                        countOne = 0
-                        countTwo = 0
-
-                        linesOne = f1.readlines()
-                        linesTwo = f2.readlines()
-
-                        #TO DO ~ This doesn't work very well if a space was added to a file, but a majority of the files contents are the same
-                        #Add modifications to handle this...
-                        for lineOne in linesOne:
-                            countOne += 1
-                            for lineTwo in linesTwo:
-                                countTwo += 1
-                                if(countOne == countTwo):
-                                    if lineOne == lineTwo:
-                                        break
-                                    else:
-                                        if not ignoreDifferences(lineOne, lineTwo):
-                                            print("line: " + str(countOne) + " " + str(countTwo))
-                                            print("New: " + str(lineOne))
-                                            print("Old: " + str(lineTwo))
-                                    break
+                        with open(directoryOne + "/" + filenameOne, "r") as f1, open(directoryTwo + "/" + filenameTwo, "r") as f2:
+                            countOne = 0
                             countTwo = 0
-                        f1.close()
-                        f2.close()
+
+                            linesOne = f1.readlines()
+                            linesTwo = f2.readlines()
+
+                            # todo Add modifications to handle this...
+                            # todo add ability to recognize when lines have shifted but not changed
+                            for lineOne in linesOne:
+                                countOne += 1
+                                for lineTwo in linesTwo:
+                                    countTwo += 1
+                                    if(countOne == countTwo):
+                                        if lineOne == lineTwo:
+                                            break
+                                        else:
+                                            if not ignoreDifferences(lineOne, lineTwo):
+                                                print("line: " + str(countOne) + " " + str(countTwo))
+                                                print("New: " + str(lineOne))
+                                                print("Old: " + str(lineTwo))
+                                        break
+                                countTwo = 0
