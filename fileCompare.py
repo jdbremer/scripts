@@ -1,4 +1,4 @@
-#TO DO ~ Add comments
+# this function takes two folders containing files with the same names and compares those files
 
 import filecmp
 import os.path
