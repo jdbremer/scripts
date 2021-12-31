@@ -47,19 +47,16 @@ def ignoreDifferences(lineOne, lineTwo):
 
 
 if __name__ == "__main__":
-    directoryOne = ""
-    directoryTwo = ""
-    try:
-        if("-h" == sys.argv[1]):
-            print("First arg is dir 1")
-            print("Second arg is dir 2")
-        else:
-            directoryOne = sys.argv[1]
-            print(directoryOne)
-            directoryTwo = sys.argv[2]
-            print(directoryTwo)
-    except IndexError:
-        print("IndexError")
+    if len(sys.argv) < 3:  # if less than 2 arguments are passed (sys.argv[0] is the filepath)
+        raise Exception("two directories should be provided")
+    elif("-h" == sys.argv[1]):
+        print("First arg is dir 1")
+        print("Second arg is dir 2")
+    else:
+        directoryOne = sys.argv[1]
+        print(directoryOne)
+        directoryTwo = sys.argv[2]
+        print(directoryTwo)
 
     for filenameOne in os.listdir(directoryOne):
             for filenameTwo in os.listdir(directoryTwo):
