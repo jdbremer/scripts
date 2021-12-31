@@ -17,6 +17,31 @@ class bcolors:
     UNDERLINE = '\033[4m'
 
 
+ignoreList = [
+    " ",
+]
+
+
+def ignoreDifferences(lineOne, lineTwo):
+    # this function takes two lines of code and returns a boolean on whether the change is significant
+    # considerations of blank lines is intentionally ignored, this should be considered in main()
+    assert(isinstance(lineOne, str), isinstance(lineOne, str))  # verify input is a string
+    # find every difference between the two lines
+    if len(lineOne) > len(lineTwo):
+        longerString, shorterString = lineOne, lineTwo
+    else:
+        longerString, shorterString = lineTwo, lineOne
+    # create a list of indexes where the
+    diffIndex = []
+    for i in range(len(longerString)):
+        if longerString[i] != shorterString[i]:
+            diffIndex.append(i)
+    # see if any of the added/removed items in the longer string are not, if not return False
+    for i in diffIndex:
+        if longerString[i] not in ignoreList:
+            return False
+    return True
+
 if __name__ == "__main__":
     directoryOne = ""
     directoryTwo = ""
@@ -58,10 +83,11 @@ if __name__ == "__main__":
                                     if lineOne == lineTwo:   
                                         break
                                     else:
-                                        print("line: " +  str(countOne) + " " + str(countTwo))
-                                        print("New: " + str(lineOne))
-                                        print("Old: " + str(lineTwo))
-                                    break   
+                                        if not ignoreDifferences(lineOne, lineTwo):
+                                            print("line: " + str(countOne) + " " + str(countTwo))
+                                            print("New: " + str(lineOne))
+                                            print("Old: " + str(lineTwo))
+                                    break
                             countTwo = 0
                         f1.close()                                       
                         f2.close() 
