@@ -14,7 +14,7 @@ def calculate_apl(filename):
     # convert image to numpy array
     data = np.asarray(image)
 
-    # calculate APL
+    # calculate APL slicing is to remove the 255 at the end of each pixel array so entire array can be averaged
     APL = np.average(data[:, :, :3]) / 255
 
     return APL
@@ -22,7 +22,7 @@ def calculate_apl(filename):
 
 if __name__ == "__main__":
     # prompt user for image
-    filename = input("Enter the file name (including extension) of the image: ")
+    filepath = input("Enter the file name (including extension) of the image: ")
 
-    result = calculate_apl()
+    result = calculate_apl(filepath)
     print("The APL is ", result)
